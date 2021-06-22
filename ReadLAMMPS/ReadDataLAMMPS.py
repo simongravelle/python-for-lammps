@@ -69,7 +69,7 @@ def searchmatrix(keywords,lines,nline):
             status = np.all(variable.T[idx]);
             if status == True:
                 col = idx;
-        variable = variable.T[0:col]
+        variable = variable.T[0:col+1]
     else:
         variable = 0;
     return variable
