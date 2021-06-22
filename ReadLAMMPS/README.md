@@ -1,3 +1,7 @@
+## Note
+
+This code is in development 
+
 ## How to use
 
 from ReadDataLAMMPS import *
