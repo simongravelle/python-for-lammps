@@ -156,9 +156,9 @@ def readdatalammps(datafile,atomStyle=None):
         Nimpropers = searchvariable(keywordsHeader[4],'single_integer',datalines);
         Tatoms = searchvariable(keywordsHeader[5],'single_integer',datalines);
         Tbonds = searchvariable(keywordsHeader[6],'single_integer',datalines);
-        Tangle = searchvariable(keywordsHeader[7],'single_integer',datalines);
-        Tdihedral = searchvariable(keywordsHeader[8],'single_integer',datalines);
-        Timproper = searchvariable(keywordsHeader[9],'single_integer',datalines);
+        Tangles = searchvariable(keywordsHeader[7],'single_integer',datalines);
+        Tdihedrals = searchvariable(keywordsHeader[8],'single_integer',datalines);
+        Timpropers = searchvariable(keywordsHeader[9],'single_integer',datalines);
         global nline 
         nline = np.max([Natoms,Nbonds,Nangles,Ndihedrals,Nimpropers,Tatoms,Tbonds,Tangle,Tdihedral,Timproper])
         extraBond = searchvariable(keywordsHeader[10],'single_integer',datalines);
