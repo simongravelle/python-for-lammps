@@ -66,7 +66,6 @@ def searchmatrix(keywords,lines,nline,ncolumn):
                 do = 'no';
         # remove null lines
         variable = variable[~np.all(variable == 0, axis=1)]
-        variable = variable.T
         if ncolumn == 0:
             # remove null columns 
             nullcolumn = np.all(variable != 0, axis=0)
@@ -75,6 +74,8 @@ def searchmatrix(keywords,lines,nline,ncolumn):
                 if status == True:
                     col = idx;
                 variable = variable.T[0:col+1]
+        else : 
+            variable = variable.T
     else:
         variable = 0;
     return variable
@@ -187,16 +188,16 @@ def readdatalammps(datafile,atomStyle=None):
                 moleculeID = AllAtomsProperties[1]
                 atomtype = AllAtomsProperties[2]
                 charge = AllAtomsProperties[3]
-                coordinates = AllAtomsProperties[4:6]
+                coordinates = AllAtomsProperties[4:7]
             elif atomStyle == 'atomic':
                 atomID = AllAtomsProperties[0]
                 atomtype = AllAtomsProperties[1]
-                coordinates = AllAtomsProperties[2:4] 
+                coordinates = AllAtomsProperties[2:5] 
             elif atomStyle == 'molecular':
                 atomID = AllAtomsProperties[0]
                 moleculeID = AllAtomsProperties[1]
                 atomtype = AllAtomsProperties[2]
-                coordinates = AllAtomsProperties[3:5]
+                coordinates = AllAtomsProperties[3:6]
         AtomsProperties = B()
         Velocities = searchmatrix(keywordsAtomProperty[1],datalines,nline,4);
         Masses = searchmatrix(keywordsAtomProperty[2],datalines,nline,2);
