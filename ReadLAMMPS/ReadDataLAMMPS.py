@@ -160,7 +160,7 @@ def readdatalammps(datafile,atomStyle=None):
         Tdihedrals = searchvariable(keywordsHeader[8],'single_integer',datalines);
         Timpropers = searchvariable(keywordsHeader[9],'single_integer',datalines);
         global nline 
-        nline = np.max([Natoms,Nbonds,Nangles,Ndihedrals,Nimpropers,Tatoms,Tbonds,Tangle,Tdihedral,Timproper])
+        nline = np.max([Natoms,Nbonds,Nangles,Ndihedrals,Nimpropers,Tatoms,Tbonds,Tangles,Tdihedrals,Timpropers])
         extraBond = searchvariable(keywordsHeader[10],'single_integer',datalines);
         extraAngle = searchvariable(keywordsHeader[11],'single_integer',datalines);
         extraDihedral = searchvariable(keywordsHeader[12],'single_integer',datalines);
