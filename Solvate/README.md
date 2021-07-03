@@ -12,4 +12,4 @@ lz = 16 # size for the waterbox
 d = 2.8 # distance between solute
 hydrated = hydrate(SoluteData,SolventData,lx,ly,lz,d)
 
-# SoluteData and SolventData can be generated using ReadDataLAMMPS
+SoluteData and SolventData can be generated using ReadDataLAMMPS
