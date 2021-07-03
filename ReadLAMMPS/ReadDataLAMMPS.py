@@ -32,7 +32,7 @@ def searchvariable(keywords,type_variable,lines):
             
     return variable
     
-def searchmatrix(keywords,lines,nline):
+def searchmatrix(keywords,lines,nline,ncolumn):
 
     '''
     description : search a keyword in the LAMMPS input file and return the matrix right below it
@@ -50,7 +50,10 @@ def searchmatrix(keywords,lines,nline):
             if keywords in line:
                 if 'BondBond Coeffs' and 'BondAngle Coeffs' and 'AngleAngle Coeffs' not in line:
                     lineId = num;
-        variable = np.zeros((nline,10));
+        if ncolumn == 0:
+        	variable = np.zeros((nline,10))
+        else :
+        	variable = np.zeros((nline,ncolumn))
         i = 0;
         do = 'yes';
         while do == 'yes':
@@ -63,13 +66,15 @@ def searchmatrix(keywords,lines,nline):
                 do = 'no';
         # remove null lines
         variable = variable[~np.all(variable == 0, axis=1)]
-        # remove null columns 
-        nullcolumn = np.all(variable != 0, axis=0)
-        for idx in range(len(nullcolumn)):
-            status = np.all(variable.T[idx]);
-            if status == True:
-                col = idx;
-        variable = variable.T[0:col+1]
+        variable = variable.T
+        if ncolumn == 0:
+            # remove null columns 
+            nullcolumn = np.all(variable != 0, axis=0)
+            for idx in range(len(nullcolumn)):
+                status = np.all(variable.T[idx]);
+                if status == True:
+                    col = idx;
+                variable = variable.T[0:col+1]
     else:
         variable = 0;
     return variable
@@ -174,45 +179,45 @@ def readdatalammps(datafile,atomStyle=None):
         ############################
         
         class B:
-            AllAtomsProperties = searchmatrix(keywordsAtomProperty[0],datalines,nline);
+            AllAtomsProperties = searchmatrix(keywordsAtomProperty[0],datalines,nline,7)
             if atomStyle == 'full' or atomStyle == None:
                 if atomStyle == None:
                     print('Atom style full has been assumed')
-                atomID = AllAtomsProperties[0];
-                moleculeID = AllAtomsProperties[1];
-                atomtype = AllAtomsProperties[2];
-                charge = AllAtomsProperties[3];
-                coordinates = AllAtomsProperties[4:6];
+                atomID = AllAtomsProperties[0]
+                moleculeID = AllAtomsProperties[1]
+                atomtype = AllAtomsProperties[2]
+                charge = AllAtomsProperties[3]
+                coordinates = AllAtomsProperties[4:6]
             elif atomStyle == 'atomic':
-                atomID = AllAtomsProperties[0];
-                atomtype = AllAtomsProperties[1];
-                coordinates = AllAtomsProperties[2:4];  
+                atomID = AllAtomsProperties[0]
+                atomtype = AllAtomsProperties[1]
+                coordinates = AllAtomsProperties[2:4] 
             elif atomStyle == 'molecular':
-                atomID = AllAtomsProperties[0];
-                moleculeID = AllAtomsProperties[1];
-                atomtype = AllAtomsProperties[2];
-                coordinates = AllAtomsProperties[3:5];
+                atomID = AllAtomsProperties[0]
+                moleculeID = AllAtomsProperties[1]
+                atomtype = AllAtomsProperties[2]
+                coordinates = AllAtomsProperties[3:5]
         AtomsProperties = B()
-        Velocities = searchmatrix(keywordsAtomProperty[1],datalines,nline);
-        Masses = searchmatrix(keywordsAtomProperty[2],datalines,nline);
+        Velocities = searchmatrix(keywordsAtomProperty[1],datalines,nline,4);
+        Masses = searchmatrix(keywordsAtomProperty[2],datalines,nline,2);
         # Still to be implemented : Ellipsoids, Lines, Triangles, Bodies
         
         #################################
         ## Molecular topology sections ##
         #################################
-        Bonds = searchmatrix(keywordsMoleculartopology[0],datalines,nline);
-        Angles = searchmatrix(keywordsMoleculartopology[1],datalines,nline);
-        Dihedrals = searchmatrix(keywordsMoleculartopology[2],datalines,nline);
-        Impropers = searchmatrix(keywordsMoleculartopology[3],datalines,nline);
+        Bonds = searchmatrix(keywordsMoleculartopology[0],datalines,nline,4);
+        Angles = searchmatrix(keywordsMoleculartopology[1],datalines,nline,5);
+        Dihedrals = searchmatrix(keywordsMoleculartopology[2],datalines,nline,6);
+        Impropers = searchmatrix(keywordsMoleculartopology[3],datalines,nline,6);
 
         ##########################
         ## Force field sections ##
         ##########################   
-        PairCoeffs = searchmatrix(keywordsForcefield[0],datalines,nline);
-        PairIJCoeffs = searchmatrix(keywordsForcefield[1],datalines,nline);
-        AngleCoeffs = searchmatrix(keywordsForcefield[2],datalines,nline);
-        DihedralCoeffs = searchmatrix(keywordsForcefield[3],datalines,nline);
-        ImproperCoeffs = searchmatrix(keywordsForcefield[4],datalines,nline);
+        PairCoeffs = searchmatrix(keywordsForcefield[0],datalines,nline,0);
+        PairIJCoeffs = searchmatrix(keywordsForcefield[1],datalines,nline,0);
+        AngleCoeffs = searchmatrix(keywordsForcefield[2],datalines,nline,0);
+        DihedralCoeffs = searchmatrix(keywordsForcefield[3],datalines,nline,0);
+        ImproperCoeffs = searchmatrix(keywordsForcefield[4],datalines,nline,0);
         
         # Still to be implemented :  class 2 force field sections
         # class 2 force field sections
