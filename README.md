@@ -1,3 +1,3 @@
-# Python scripts for dealing with molecular dynamics simualtions #
+# Python scripts for dealing with molecular dynamics simulations #
 
-Scripts for manipulating LAMMPS data files and read them with python.
+Scripts for manipulating LAMMPS data files and import them with python.
