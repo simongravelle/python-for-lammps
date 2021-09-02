@@ -57,11 +57,18 @@ def searchmatrix(keywords,lines,nline,ncolumn):
         i = 0;
         do = 'yes';
         while do == 'yes':
-            temp = lines[lineId+1+i][0:-1].split(' ');
-            data = [x for x in temp if x];
-            if len(data) > 0:
-                variable[i][0:len(data)] = data;
-                i += 1;
+            if lineId+1+i<len(lines):
+                temp = lines[lineId+1+i][0:-1].split(' ');
+                data = [x for x in temp if x];
+                if len(data) > 0:
+                    if len(data) > ncolumn: #to remove the three additional columns that sometimes appear
+                        variable[i][0:len(data)] = data[0:7]
+                        i += 1
+                    else:
+                        variable[i][0:len(data)] = data 
+                        i += 1
+                else:
+                    do = 'no';
             else:
                 do = 'no';
         # remove null lines
