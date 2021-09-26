@@ -1,4 +1,6 @@
-def neighborsearch(neighbor,molecule,cptatm):
+import copy
+import numpy as np
+def neighborsearch(neighbor,molecule,cptatm, x, y, z, Lx, Ly, Lz):
     '''Search neighbor in a box and return the closest distance found'''
     mind = 10
     XYZ = copy.deepcopy(neighbor.T[0:cptatm].T)

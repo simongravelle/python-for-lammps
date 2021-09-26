@@ -1,3 +1,5 @@
+import os
+import numpy as np
 def loadff(datapath):
     '''Import all force field parameters'''
     M, PC, B, A, D, I = 0, 0, 0, 0, 0, 0

@@ -1,3 +1,6 @@
+import random
+import numpy as np
+from scipy.spatial.transform import Rotation as R
 def randomorientation(XYZ):
     '''3D aleatory rotation of molecule/particule coordinate'''
     rotation_degrees = random.randint(0,9000)/100

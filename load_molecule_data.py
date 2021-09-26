@@ -1,3 +1,5 @@
+import os
+import numpy as np
 def loaddata(datapath):
     '''Import all molecule data'''
     P, B, A, D, I = 0, 0, 0, 0, 0
