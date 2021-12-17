@@ -2,7 +2,7 @@ import copy
 import numpy as np
 from numpy.linalg import norm
 def neighborsearch(neighbor,molecule,cptatm, x, y, z, Lx, Ly, Lz):
-    '''Search all neighbor to a molecule in a box and return the closest distance'''
+    '''Search neighbor in a box and return the closest distance found'''
     box = np.array([Lx, Ly, Lz])
     minr = 10
     for m in molecule.T:
