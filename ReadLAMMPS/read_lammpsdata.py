@@ -11,7 +11,7 @@ class ReadLammpsData():
         Copy attributes to another class with:
         ReadLammpsData.__dict__ = obj.__dict__.copy()
         
-        addapted from the LAMMPS reader of  velocirobbie: 
+        addapted from the LAMMPS reader of velocirobbie: 
         https://github.com/velocirobbie/make-graphitics
         """
         self.filename = filename
